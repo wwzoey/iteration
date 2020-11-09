@@ -104,3 +104,13 @@ map(list_norms, median)
 map(list_norms, IQR)
 ```
 
+```{r}
+output = map_dbl(list_norms, median, .id = "input")
+```
+
+```{r}
+output = map_dfr(list_norms, mean_and_sd, .id = "input")
+```
+
+
+

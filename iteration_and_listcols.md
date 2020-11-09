@@ -214,3 +214,11 @@ map(list_norms, IQR)
     ## 
     ## $d
     ## [1] 1.05479
+
+``` r
+output = map_dbl(list_norms, median, .id = "input")
+```
+
+``` r
+output = map_dfr(list_norms, mean_and_sd, .id = "input")
+```
