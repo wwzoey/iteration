@@ -112,5 +112,35 @@ output = map_dbl(list_norms, median, .id = "input")
 output = map_dfr(list_norms, mean_and_sd, .id = "input")
 ```
 
+## List columns
 
+```{r}
+listcol_df = 
+  tibble(
+    name = c("a", "b", "c", "d"),
+    samp = list_norms
+  )
+
+listcol_df %>% pull(name)
+listcol_df %>% pull(samp)
+
+listcol_df %>%
+  filter(name == "a")
+mean_and_sd(listcol_df$samp[[1]])
+```
+
+```{r}
+map(listcol_df$samp, mean_and_sd)
+```
+
+Add a new column
+
+```{r}
+listcol_df = 
+  listcol_df %>% 
+  mutate(summary = map(samp, mean_and_sd),
+         medians = map_dbl(samp, median))
+
+listcol_df
+```
 
