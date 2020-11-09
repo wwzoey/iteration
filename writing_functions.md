@@ -125,3 +125,82 @@ z_scores(sample(c(TRUE, FALSE), 25, replace = TRUE))
 ```
 
     ## Error in z_scores(sample(c(TRUE, FALSE), 25, replace = TRUE)): Argument x should be numeric
+
+## Multiple outputs
+
+``` r
+mean_and_sd = function(x) {
+        
+  if (!is.numeric(x)) {
+    stop("Argument x should be numeric")      
+  }        
+  
+  if (length(x) < 3) {
+    stop("Input must have at least 3 numbers")
+  }   
+        
+  mean_x = mean(x)
+  sd_x = sd(x)
+  
+  tibble(
+    mean = mean_x,
+    sd = sd_x
+  )
+              
+}
+```
+
+Check that the function works.
+
+``` r
+x_vec = rnorm(100, mean = 0, sd = 1)
+mean_and_sd(x_vec)
+```
+
+    ## # A tibble: 1 x 2
+    ##      mean    sd
+    ##     <dbl> <dbl>
+    ## 1 -0.0719 0.899
+
+## Multiple inputs
+
+``` r
+sim_data = 
+  tibble(
+    x = rnorm(n = 100, mean = 3, sd = 2)
+  )
+
+sim_data %>%
+  summarize(
+    mean = mean(x),
+    sd = sd(x)
+  )
+```
+
+    ## # A tibble: 1 x 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  3.14  2.02
+
+``` r
+sim_mean_sd = function(samp_size, mu, sigma) {
+        
+  sim_data = 
+    tibble(
+      x = rnorm(n = samp_size, mean = mu, sd = sigma)
+    )
+
+  sim_data %>%
+    summarize(
+      mean = mean(x),
+      sd = sd(x)
+    )      
+}
+
+sim_mean_sd(100, 6, 3)
+```
+
+    ## # A tibble: 1 x 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  6.04  2.97

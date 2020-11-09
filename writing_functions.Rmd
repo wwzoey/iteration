@@ -66,3 +66,68 @@ z_scores(iris)
 z_scores(sample(c(TRUE, FALSE), 25, replace = TRUE))
 ```
 
+## Multiple outputs
+
+```{r}
+mean_and_sd = function(x) {
+        
+  if (!is.numeric(x)) {
+    stop("Argument x should be numeric")      
+  }        
+  
+  if (length(x) < 3) {
+    stop("Input must have at least 3 numbers")
+  }   
+        
+  mean_x = mean(x)
+  sd_x = sd(x)
+  
+  tibble(
+    mean = mean_x,
+    sd = sd_x
+  )
+              
+}
+
+```
+
+Check that the function works.
+
+```{r}
+x_vec = rnorm(100, mean = 0, sd = 1)
+mean_and_sd(x_vec)
+```
+
+## Multiple inputs
+
+```{r}
+sim_data = 
+  tibble(
+    x = rnorm(n = 100, mean = 3, sd = 2)
+  )
+
+sim_data %>%
+  summarize(
+    mean = mean(x),
+    sd = sd(x)
+  )
+```
+
+```{r}
+sim_mean_sd = function(samp_size, mu, sigma) {
+        
+  sim_data = 
+    tibble(
+      x = rnorm(n = samp_size, mean = mu, sd = sigma)
+    )
+
+  sim_data %>%
+    summarize(
+      mean = mean(x),
+      sd = sd(x)
+    )      
+}
+
+sim_mean_sd(100, 6, 3)
+```
+
