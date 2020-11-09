@@ -91,3 +91,16 @@ for (i in 1:4) {
 }
 ```
 
+## Let's try map!
+
+```{r}
+map(list_norms, mean_and_sd)
+```
+
+What if I want a different function?
+
+```{r}
+map(list_norms, median)
+map(list_norms, IQR)
+```
+
