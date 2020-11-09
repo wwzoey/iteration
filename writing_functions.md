@@ -313,3 +313,19 @@ all_reviews =
     read_page_reviews(dynamite_urls[4]),
     read_page_reviews(dynamite_urls[5]))
 ```
+
+## Mean scoping example
+
+``` r
+f = function(x) {
+  z = x + y
+  z
+}
+
+x = 1
+y = 2
+
+f(x = y)
+```
+
+    ## [1] 4
