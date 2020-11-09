@@ -1,0 +1,11 @@
+---
+title: "Iteration and list columns"
+author: "Wenzhao Wu"
+date: "11/9/2020"
+output: github_document
+---
+
+```{r setup}
+
+```
+
